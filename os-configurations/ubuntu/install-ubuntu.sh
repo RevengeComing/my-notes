@@ -1,5 +1,5 @@
 # install system requirements
-sudo apt install vim curl git wget
+sudo apt install vim curl git wget build-essential
 
 # install oh-my-zsh
 sudo apt install zsh
