@@ -1,0 +1,41 @@
+# PERSONAL SECTION
+COLOR_RED="\033[0;31m"
+COLOR_YELLOW="\033[0;33m"
+COLOR_YELLOW="\e[93m"
+COLOR_GREEN="\033[0;32m"
+COLOR_OCHRE="\033[38;5;95m"
+COLOR_BLUE="\033[0;34m"
+COLOR_LBLUE="\e[96m"
+COLOR_WHITE="\033[0;37m"
+COLOR_RESET="\033[0m"
+BOLD=$(tput bold)
+BLINK="\e[5m"
+NORMAL=$(tput sgr0)
+
+
+export PATH=/home/$USER/.local/bin:/home/$USER/bin:/usr/local/bin:/usr/local/sbin:/usr/bin:/usr/sbin:/usr/local/go/bin
+
+alias kuse="kubectl config use-context"
+
+export PS1="${COLOR_GREEN}${BOLD}[\$(date +%H:%M:%S)]${NORMAL} [${COLOR_YELLOW}\u${NORMAL} ${BOLD}kube@\$(kubectl config current-context)${NORMAL} ${COLOR_LBLUE}\w${NORMAL}]# "
+export PROMPT_DIRTRIM=2
+
+function machine() {
+        RND=$(cat /dev/urandom | tr -dc 'a-z0-9' | fold -w 8 | head -n 1)
+        telepresence \
+                --context infra \
+                --namespace divar-infra \
+                --new-deployment ubuntu-$RND \
+                --method container \
+                --docker-run \
+                        -it \
+                        --rm \
+                        --mount type=bind,source=/tmp,target=/tmp \
+                        --mount type=bind,source=$HOME,target=$HOME \
+                        -v /etc/group:/etc/group \
+                        -v /etc/passwd:/etc/passwd \
+                        -u $(id -u):$(id -g) \
+                        ocean:machine
+}
+
+#source /home/$USER/.cargo/env
