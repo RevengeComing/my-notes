@@ -12,7 +12,7 @@ sudo apt-get install python3.7-dev python3.8-dev python3.9-dev virtualenv
 
 # install golang
 wget https://dl.google.com/go/go1.18.3.linux-amd64.tar.gz -P /tmp
-sudo tar -C /usr/local -xzf /tmp/go1.15.6.linux-amd64.tar.gz
+sudo tar -C /usr/local -xzf /tmp/go1.18.3.linux-amd64.tar.gz
 
 # install docker CE
 sudo apt-get install apt-transport-https ca-certificates curl gnupg-agent software-properties-common
