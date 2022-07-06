@@ -8,10 +8,10 @@ sh -c "$(curl -fsSL https://raw.github.com/ohmyzsh/ohmyzsh/master/tools/install.
 # install python
 sudo add-apt-repository ppa:deadsnakes/ppa
 sudo apt-get update
-sudo apt-get install python3.7-dev python3.8-dev python3.9-dev python3.6-dev python3.5-dev python2.7-dev virtualenv
+sudo apt-get install python3.7-dev python3.8-dev python3.9-dev virtualenv
 
 # install golang
-wget https://golang.org/dl/go1.15.6.linux-amd64.tar.gz -P /tmp
+wget https://dl.google.com/go/go1.18.3.linux-amd64.tar.gz -P /tmp
 sudo tar -C /usr/local -xzf /tmp/go1.15.6.linux-amd64.tar.gz
 
 # install docker CE
