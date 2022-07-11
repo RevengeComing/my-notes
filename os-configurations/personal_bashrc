@@ -17,7 +17,7 @@ export PATH=/home/$USER/.local/bin:/home/$USER/bin:/usr/local/bin:/usr/local/sbi
 
 alias kuse="kubectl config use-context"
 
-export PS1="${COLOR_GREEN}${BOLD}[\$(date +%H:%M:%S)]${NORMAL} [${COLOR_YELLOW}\u${NORMAL} ${BOLD}kube@\$(kubectl config current-context)${NORMAL} ${COLOR_LBLUE}\w${NORMAL}]# "
+export PS1="\[${COLOR_GREEN}${BOLD}\][$(date +%H:%M:%S)]\[${NORMAL}\] [\[${COLOR_YELLOW}\]\u\[${NORMAL}\] \[${COLOR_LBLUE}\]\w\[${NORMAL}\]]$ "
 export PROMPT_DIRTRIM=2
 
 function machine() {
