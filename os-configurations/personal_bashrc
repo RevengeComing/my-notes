@@ -13,29 +13,16 @@ BLINK="\e[5m"
 NORMAL=$(tput sgr0)
 
 
-export PATH=/home/$USER/.local/bin:/home/$USER/bin:/usr/local/bin:/usr/local/sbin:/usr/bin:/usr/sbin:/usr/local/go/bin
-
-alias kuse="kubectl config use-context"
-
-export PS1="\[${COLOR_GREEN}${BOLD}\][$(date +%H:%M:%S)]\[${NORMAL}\] [\[${COLOR_YELLOW}\]\u\[${NORMAL}\] \[${COLOR_LBLUE}\]\w\[${NORMAL}\]]$ "
-export PROMPT_DIRTRIM=2
-
-function machine() {
-        RND=$(cat /dev/urandom | tr -dc 'a-z0-9' | fold -w 8 | head -n 1)
-        telepresence \
-                --context infra \
-                --namespace divar-infra \
-                --new-deployment ubuntu-$RND \
-                --method container \
-                --docker-run \
-                        -it \
-                        --rm \
-                        --mount type=bind,source=/tmp,target=/tmp \
-                        --mount type=bind,source=$HOME,target=$HOME \
-                        -v /etc/group:/etc/group \
-                        -v /etc/passwd:/etc/passwd \
-                        -u $(id -u):$(id -g) \
-                        ocean:machine
+parse_git_branch() {
+     git branch 2> /dev/null | sed -e '/^[^*]/d' -e 's/* \(.*\)/ (\1)/'
 }
 
-#source /home/$USER/.cargo/env
+export PATH=/home/$USER/.local/bin:/home/$USER/bin:/usr/local/bin:/usr/local/sbin:/usr/bin:/usr/sbin:/usr/local/go/bin:/snap/bin:$PATH:/usr/games
+
+export PS1="\[${COLOR_GREEN}${BOLD}\][$(date +%H:%M:%S)]\[${NORMAL}\] [\[${COLOR_YELLOW}\]\u\[${NORMAL}\] \[${COLOR_LBLUE}\]\w\[${NORMAL}\]]\[${COLOR_GREEN}${BOLD}\]\$(parse_git_branch)\[${NORMAL}\] $ "
+export PROMPT_DIRTRIM=2
+
+
+export LD_LIBRARY_PATH=/usr/lib64
+export PATH=$PATH:$HOME/.tfenv/bin
+
